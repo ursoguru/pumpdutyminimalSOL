@@ -1,0 +1,8 @@
+version: '3.4'
+
+services:
+  pumpdutyminimal:
+    image: ${DOCKER_REGISTRY-}pumpdutyminimal
+    build:
+      context: .
+      dockerfile: pumpdutyminimal/Dockerfile
