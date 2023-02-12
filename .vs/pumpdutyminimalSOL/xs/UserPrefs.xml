@@ -8,7 +8,7 @@
       <File FileName="pumpdutyminimal/_Imports.razor" />
       <File FileName="pumpdutyminimal/Dockerfile" />
       <File FileName="pumpdutyminimal/Pages/Index.razor" />
-      <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor" Line="529" Column="1" />
+      <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor" Line="371" Column="37" />
       <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor.css" />
     </Files>
     <Pads>
@@ -21,7 +21,7 @@
                 <Node name="FrameworkReferences" expanded="True" />
               </Node>
               <Node name="Pages" expanded="True">
-                <Node name="PumpCalculater.razor" expanded="True" selected="True" />
+                <Node name="PumpCalculater.razor" expanded="True" />
               </Node>
               <Node name="Properties" expanded="True" />
               <Node name="wwwroot" expanded="True">
@@ -31,6 +31,9 @@
             </Node>
           </Node>
         </State>
+      </Pad>
+      <Pad Id="MonoDevelop.Debugger.WatchPad">
+        <State />
       </Pad>
     </Pads>
   </MonoDevelop.Ide.Workbench>
