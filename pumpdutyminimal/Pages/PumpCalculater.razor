@@ -4,7 +4,7 @@
 
 <div class="container text-left">
     <div class="row">
-        <div class="col-sm-6">
+        <div class="col-md-6">
             <table class="table">
                 <thead>
                     <tr>
@@ -159,9 +159,10 @@
                                         <td>
                                             <div class="input-group mb-3" style="width:200px">
                                                 <!--value="@pumpSelections.pipewidth"-->
-                                                <input type="number" step=1 class="form-control" value=40 @onchange="@OnEditPipeWidth">
+                                                <input type="number" step=1 class="form-control" value="@pumpSelections.pipewidth" @onchange="@OnEditPipeWidth">
 
                                             </div>
+                                            <p style="color:red"><small>@pipewidtherror</small></p>
                                         </td>
                                     </tr>
                                     <tr>
@@ -169,9 +170,10 @@
                                         <td>
                                             <div class="input-group mb-3" style="width:200px">
                                                 <!--value="@pumpSelections.pipelength"-->
-                                                <input type="number" step=1 class="form-control" value=70 @onchange="@OnEditPipeLength">
+                                                <input type="number" step=1 class="form-control" value="@pumpSelections.pipelength" @onchange="@OnEditPipeLength">
 
                                             </div>
+                                            <p style="color:red"><small>@pipelengtherror</small></p>
                                         </td>
                                     </tr>
                                 </tbody>
@@ -181,8 +183,8 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-sm-6 text-left">
-            <div class="d-none d-sm-block">
+        <div class="col-md-6 text-left">
+            <div class="d-none d-md-block">
                 <div class="box"></div>
 
                 <!-- <p role="status">Total: @currentCount</p> -->
@@ -283,14 +285,18 @@
     List<int> washbasins = new List<int>() { 0, 1, 2, 3, 4, 5 };
     List<int> bidets = new List<int>() { 0, 1, 2 };
 
+    public string pipewidtherror = "";
+    public string pipelengtherror = "";
+
+
 
     // enum Toilets { FC1, FM1, FC2, FM2 };
 
     List<string> toilets = new List<string>() { "1 x Flush tank / Cistern", "1 x Flush Master", "2 x Flush tank / Cistern", "2 x Flush Masters" };
     List<string> pipes = new List<string>() { "Steel Pipe ( New )", "Steel Pipe ( old )", "UPVC Pipe", "Asbestos cement" };
-    string selectedString = "China";
-    string selectedValue = "10";
-    int newValue;
+    //string selectedString = "China";
+    // string selectedValue = "10";
+    // int newValue;
 
     private int currentCount = 0;
 
@@ -368,8 +374,15 @@
           { 20, 19, 18, 17, 16, 14,},
           { 30, 28.5F, 27, 25, 24, 21,},
           { 41, 38, 36, 34, 32, 28,},
-          { 52, 48, 45, 42, 40, 36,}
-             };
+          { 52, 48, 45, 42, 40, 36,},
+          { 62, 57, 54, 51, 48, 43,},
+          { 83, 77, 73, 69, 65, 58,},
+          { 104, 97, 92, 87, 81, 73,},
+          { 124, 116, 111, 104, 92, 87,},
+          { 145, 136, 130, 122, 113, 102,},
+          { 166, 156, 148, 139, 130, 118,},
+          { 187, 175, 167, 157, 146, 134,},
+          { 208, 195, 186, 175, 163, 150,},};
 
     string[,] boosterProductsVMS8 = new string[,]
         {{"VMS8-20/1", "VMS8-20/1S","n/a" },
@@ -387,7 +400,7 @@
             {"VMS8-200", "n/a" ,"n/a"}
         };
 
-    PumpSelections pumpSelections = new PumpSelections(10, 2, 1, 0, "2 x Flush tank / Cistern", "Steel Pipe ( old )", 40.0F, 70.0F);
+    PumpSelections pumpSelections = new PumpSelections(10, 2, 1, 0, "2 x Flush tank / Cistern", "Steel Pipe ( old )", 39.0F, 70.0F);
     //pumpSelections.stories = 10;
 
 
@@ -662,27 +675,29 @@
     }
     void OnEditPipeWidth(ChangeEventArgs e)
     {
-        pumpSelections.pipewidth = float.Parse(e.Value.ToString());
+        try { pumpSelections.pipewidth = float.Parse(e.Value.ToString()); pipewidtherror = ""; }
+        catch { pipewidtherror = "ERROR: This value used to be " + pumpSelections.pipewidth.ToString() + ".Please fix"; }
         calculateDuty();
-    }
-    void OnEditPipeLength(ChangeEventArgs e)
-    {
-        pumpSelections.pipelength = float.Parse(e.Value.ToString());
-        calculateDuty();
-    }
+        }
+        void OnEditPipeLength(ChangeEventArgs e)
+        {
+            try { pumpSelections.pipelength = float.Parse(e.Value.ToString()); pipelengtherror = ""; }
+            catch { pipelengtherror = "ERROR: This value used to be " + pumpSelections.pipelength.ToString() + ". Please fix"; }
+            calculateDuty();
+        }
 
 
 
-    /*   void OnSelect(ChangeEventArgs e)
-       {
-           selectedString = e.Value.ToString();
+        /*   void OnSelect(ChangeEventArgs e)
+           {
+               selectedString = e.Value.ToString();
 
-           Console.WriteLine("The selected country is : " + selectedString);
-       }
-       //  private void IncrementCount()
-       //  {
-       //      currentCount++;
-       //  }
-    */
+               Console.WriteLine("The selected country is : " + selectedString);
+           }
+           //  private void IncrementCount()
+           //  {
+           //      currentCount++;
+           //  }
+        */
     }
 
