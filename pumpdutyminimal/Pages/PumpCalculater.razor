@@ -220,17 +220,35 @@
                         </tr>
                     </tbody>
                 </table>
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th scope="col">Model</th>
+                            <th scope="col">380V</th>
+                            <th scope="col">220V</th>
+                            <th scope="col">12V</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@pumpsChosen.model</td>
+                            <td>@pumpsChosen.v380</td>
+                            <td>@pumpsChosen.v220</td>
+                            <td>@pumpsChosen.v12</td>
+                        </tr>
+                    </tbody>
+                </table>
 
 
 
                 <!--          <h5>toilet: @pumpSelections.toilet</h5>
-                       <h5>apartment: @pumpSelections.apartments</h5>
-                       <h5>stories: @pumpSelections.stories</h5>
-                       <h5>flow: @pumpDuty.flow</h5>
-                       <h5>head: @pumpDuty.head</h5>
-                       <h5>pipe width: @pumpSelections.pipewidth</h5>
-                       <h5>pipe length: @pumpSelections.pipelength</h5>
-                -->
+           <h5>apartment: @pumpSelections.apartments</h5>
+           <h5>stories: @pumpSelections.stories</h5>
+           <h5>flow: @pumpDuty.flow</h5>
+           <h5>head: @pumpDuty.head</h5>
+           <h5>pipe width: @pumpSelections.pipewidth</h5>
+           <h5>pipe length: @pumpSelections.pipelength</h5>
+    -->
 
             </div>
 
@@ -249,6 +267,7 @@
     protected override void OnInitialized()
     {
         calculateDuty();
+
         base.OnInitialized();
     }
 
@@ -320,6 +339,25 @@
         }
     }
 
+    struct PumpsChosen
+    {
+        public string model;
+        public string v380;
+        public string v220;
+        public string v12;
+    }
+
+    PumpsChosen pumpsChosen = new PumpsChosen();
+
+    float[,] boosterPerformance = new float[,]
+        { { 0.6F, 12.5F}, { 0.8F, 12F }, { 1.0F, 11.5F }, { 1.2F, 11.0F },
+        { 0.6F, 18.0F}, { 0.8F, 17.5F }, { 1.0F, 17.0F }, { 1.2F, 16.5F } };
+
+    string[,] boosterProducts = new string[,]
+            {{"VMS1-20", "VMS1-205","n/a" },
+            {"VMS1-30", "VMS1-305" ,"n/a"}};
+
+
 
     PumpSelections pumpSelections = new PumpSelections(10, 2, 1, 0, "2 x Flush tank / Cistern", "Steel Pipe ( old )", 40.0F, 70.0F);
     //pumpSelections.stories = 10;
@@ -327,6 +365,20 @@
 
     public void calculateDuty()
     {
+        PumpsChosen choisePumps(float[,] perf, string[,] prod, string model)
+        {
+            PumpsChosen returnStrut = new PumpsChosen();
+            returnStrut.model = "VMS1";
+            returnStrut.v380 = prod[1,0];
+            returnStrut.v220 = prod[1,1];
+            returnStrut.v12 = prod[1,2];
+
+            return returnStrut;
+
+        }
+
+        pumpsChosen = choisePumps(boosterPerformance, boosterProducts, "VMS1");
+
         float RDB14 = 0.0F;
         float RDC13 = 0.0F;
         float B14;
@@ -458,6 +510,8 @@
         // RDC18 = 110.0F;
         FB9 = pumpSelections.pipelength * (float)Math.Pow(((pumpDuty.flow / 3.6F) / (3.5888F * (float)Math.Pow(10, -6) * RDC18 * ((float)Math.Pow(pumpSelections.pipewidth, 2.63)))), 1.85);
         pumpDuty.head = FB10 + FB9;
+
+
     }
 
     /*   void OnStartup(ChangeEventArgs e)
@@ -470,6 +524,7 @@
 
         pumpSelections.apartments = int.Parse(e.Value.ToString());
         calculateDuty();
+
     }
 
     void OnSelectStories(ChangeEventArgs e)
@@ -548,5 +603,5 @@
        //      currentCount++;
        //  }
     */
-}
+    }
 
