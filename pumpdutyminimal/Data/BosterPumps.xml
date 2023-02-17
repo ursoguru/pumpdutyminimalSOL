@@ -1,6 +1,77 @@
 <?xml version="1.0" encoding="utf-8"?>
 <pumps xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
     <model>
+        <id>VMS1</id>
+        <model_groups>
+            <id>VMS1-20 Range</id>
+            <v380>VMS1-20</v380>
+            <v220>VMS1-20s</v220>
+            <kw>0.37</kw>
+            <flow>
+               <m3h>0.6</m3h>
+               <head>12.5</head>
+            </flow>
+            <flow>
+               <m3h>0.8</m3h>
+               <head>12</head>
+            </flow>
+            <flow>
+               <m3h>1</m3h>
+               <head>11.5</head>
+            </flow>
+            <flow>
+               <m3h>1.2</m3h>
+               <head>11</head>
+            </flow>
+            <flow>
+               <m3h>1.4</m3h>
+               <head>10.5</head>
+            </flow>
+            <flow>
+               <m3h>1.6</m3h>
+               <head>10</head>
+            </flow>
+            <flow>
+               <m3h>1.8</m3h>
+               <head>9.5</head>
+            </flow>
+         </model_groups>
+         <model_groups>
+            <id>VMS1-30 Range</id>
+            <v380>VMS1-30</v380>
+            <v220>VMS1-30s</v220>
+            <kw>0.37</kw>
+            <flow>
+               <m3h>0.6</m3h>
+               <head>18</head>
+            </flow>
+            <flow>
+               <m3h>0.8</m3h>
+               <head>17.1</head>
+            </flow>
+            <flow>
+               <m3h>1</m3h>
+               <head>17</head>
+            </flow>
+            <flow>
+               <m3h>1.2</m3h>
+               <head>16.5</head>
+            </flow>
+            <flow>
+               <m3h>1.4</m3h>
+               <head>16</head>
+            </flow>
+            <flow>
+               <m3h>1.6</m3h>
+               <head>15</head>
+            </flow>
+            <flow>
+               <m3h>1.8</m3h>
+               <head>14</head>
+            </flow>
+         </model_groups>
+    </model>
+    <model>
         <id>VMS8</id>
         <model_groups>
             <id>VMS8-20/1 Range</id>
@@ -10,7 +81,8 @@
             <flow>
                 <m3h>6</m3h>
                 <head>10</head>
-            </flow><flow>
+            </flow>
+            <flow>
                 <m3h>7</m3h>
                 <head>9.3</head>
             </flow>
@@ -90,5 +162,84 @@
             </flow>
         </model_groups>
     </model>
+    <model>
+        <id>VMS12</id>
+        <model_groups>
+            <id>VMS12-20 Range</id>
+            <v380>VMS12-20</v380>
+            <v220>VMS12-20S</v220>
+            <kw>1.5</kw>
+            <flow>
+                <m3h>8</m3h>
+                <head>23</head>
+            </flow>
+            <flow>
+                <m3h>9</m3h>
+                <head>22.5</head>
+            </flow>
+            <flow>
+                <m3h>10</m3h>
+                <head>22</head>
+            </flow>
+            <flow>
+                <m3h>11</m3h>
+                <head>21</head>
+            </flow>
+            <flow>
+                <m3h>12</m3h>
+                <head>20</head>
+            </flow>
+            <flow>
+                <m3h>13</m3h>
+                <head>18.5</head>
+            </flow>
+             <flow>
+                <m3h>14</m3h>
+                <head>17</head>
+            </flow>
+             <flow>
+                <m3h>15</m3h>
+                <head>15.5</head>
+            </flow>
+        </model_groups>
+        <model_groups>
+            <id>VMS12-23 Range</id>
+            <v380>VMS12-30</v380>
+            <v220>VMS12-30S</v220>
+            <kw>2.2</kw>
+            <flow>
+                <m3h>8</m3h>
+                <head>35</head>
+            </flow>
+            <flow>
+                <m3h>9</m3h>
+                <head>34</head>
+            </flow>
+            <flow>
+                <m3h>10</m3h>
+                <head>33</head>
+            </flow>
+            <flow>
+                <m3h>11</m3h>
+                <head>31.5</head>
+            </flow>
+            <flow>
+                <m3h>12</m3h>
+                <head>30</head>
+            </flow>
+            <flow>
+                <m3h>13</m3h>
+                <head>28</head>
+            </flow>
+             <flow>
+                <m3h>14</m3h>
+                <head>26</head>
+            </flow>
+             <flow>
+                <m3h>15</m3h>
+                <head>23.5</head>
+            </flow>
+        </model_groups>
+    </model>
 
-    </pumps>
+ </pumps>
