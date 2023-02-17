@@ -1,6 +1,6 @@
-﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{82B2F65E-52D9-475A-B2D2-2059718799DC}|http">
+﻿<Properties GitUserInfo="UsingGIT" StartupConfiguration="{33F0EBAD-94B1-410E-852F-26997AD4AD58}|Default">
   <MonoDevelop.Ide.ItemProperties.docker-compose PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Release" />
   <MonoDevelop.Ide.DebuggingService.PinnedWatches />
   <MonoDevelop.Ide.Workbench ActiveDocument="pumpdutyminimal/Pages/PumpCalculater.razor">
     <Files>
@@ -8,7 +8,7 @@
       <File FileName="pumpdutyminimal/_Imports.razor" />
       <File FileName="pumpdutyminimal/Dockerfile" />
       <File FileName="pumpdutyminimal/Pages/Index.razor" />
-      <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor" Line="371" Column="37" />
+      <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor" Line="701" Column="11" />
       <File FileName="pumpdutyminimal/Pages/PumpCalculater.razor.css" />
     </Files>
     <Pads>
@@ -21,7 +21,7 @@
                 <Node name="FrameworkReferences" expanded="True" />
               </Node>
               <Node name="Pages" expanded="True">
-                <Node name="PumpCalculater.razor" expanded="True" />
+                <Node name="PumpCalculater.razor" expanded="True" selected="True" />
               </Node>
               <Node name="Properties" expanded="True" />
               <Node name="wwwroot" expanded="True">

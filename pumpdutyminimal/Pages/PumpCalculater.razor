@@ -1,4 +1,7 @@
 ﻿@page "/"
+@using System;
+@using System.Collections.Generic;
+@using System.Xml.Linq;
 <!--<PageTitle>Counter One</PageTitle>-->
 <!--<h1>Counter PumpCalculater</h1>-->
 
@@ -31,9 +34,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.apartments" @onchange="@OnSelectApartments" style="width:200px">
                                                 @foreach (var apartment in apartments)
-                                                {
+                                                    {
                                                     <option value=@apartment>@apartment</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -42,9 +45,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.stories" @onchange="@OnSelectStories" style="width:200px">
                                                 @foreach (var storey in stories)
-                                                {
+                                                    {
                                                     <option value=@storey>@storey</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -57,9 +60,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.sinks" @onchange="@OnSelectSinks" style="width:200px">
                                                 @foreach (var sink in sinks)
-                                                {
+                                                    {
                                                     <option value=@sink>@sink</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -68,9 +71,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.dishwashers" @onchange="@OnSelectDishwashers" style="width:200px">
                                                 @foreach (var dishwasher in dishwashers)
-                                                {
+                                                    {
                                                     <option value=@dishwasher>@dishwasher</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -79,9 +82,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.washingmachines" @onchange="@OnSelectWashingmachines" style="width:200px">
                                                 @foreach (var washingmachine in washingmachines)
-                                                {
+                                                    {
                                                     <option value=@washingmachine>@washingmachine</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -90,9 +93,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.showers" @onchange="@OnSelectShowers" style="width:200px">
                                                 @foreach (var shower in showers)
-                                                {
+                                                    {
                                                     <option value=@shower>@shower</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -101,9 +104,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.bathtubs" @onchange="@OnSelectBathtubs" style="width:200px">
                                                 @foreach (var bathtub in bathtubs)
-                                                {
+                                                    {
                                                     <option value=@bathtub>@bathtub</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -112,9 +115,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.washbasins" @onchange="@OnSelectWashbasins" style="width:200px">
                                                 @foreach (var washbasin in washbasins)
-                                                {
+                                                    {
                                                     <option value=@washbasin>@washbasin</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -123,9 +126,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.bidets" @onchange="@OnSelectBidets" style="width:200px">
                                                 @foreach (var bidet in bidets)
-                                                {
+                                                    {
                                                     <option value=@bidet>@bidet</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -134,9 +137,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.toilet" @onchange="@OnSelectToilet" style="width:200px">
                                                 @foreach (var toilet in toilets)
-                                                {
+                                                    {
                                                     <option value=@toilet>@toilet</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -148,9 +151,9 @@
                                         <td>
                                             <select class="form-control" value="@pumpSelections.pipe" @onchange="@OnSelectPipe" style="width:200px">
                                                 @foreach (var pipe in pipes)
-                                                {
+                                                    {
                                                     <option value=@pipe>@pipe</option>
-                                                }
+                                                    }
                                             </select>
                                         </td>
                                     </tr>
@@ -228,29 +231,39 @@
                             <th scope="col">Model</th>
                             <th scope="col">380V</th>
                             <th scope="col">220V</th>
-                            <th scope="col">12V</th>
+                            <th scope="col">kW</th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                            <td>@pumpsChosen.model</td>
-                            <td>@pumpsChosen.v380</td>
-                            <td>@pumpsChosen.v220</td>
-                            <td>@pumpsChosen.v12</td>
-                        </tr>
+                        
+
+                        @{
+                            for (int i = 0; i < 11; i++)
+                            {
+                                if (pumpsChosenDisplayed[i].v380 != "n/a")
+                                {
+                                <tr>
+                                    <td>@pumpsChosenDisplayed[i].model</td>
+                                    <td>@pumpsChosenDisplayed[i].v380</td>
+                                    <td>@pumpsChosenDisplayed[i].v220</td>
+                                    <td>@pumpsChosenDisplayed[i].kw</td>
+                                </tr>
+                                }
+                            }
+                            }
                     </tbody>
                 </table>
 
 
 
                 <!--          <h5>toilet: @pumpSelections.toilet</h5>
-           <h5>apartment: @pumpSelections.apartments</h5>
-           <h5>stories: @pumpSelections.stories</h5>
-           <h5>flow: @pumpDuty.flow</h5>
-           <h5>head: @pumpDuty.head</h5>
-           <h5>pipe width: @pumpSelections.pipewidth</h5>
-           <h5>pipe length: @pumpSelections.pipelength</h5>
-    -->
+                       <h5>apartment: @pumpSelections.apartments</h5>
+                       <h5>stories: @pumpSelections.stories</h5>
+                       <h5>flow: @pumpDuty.flow</h5>
+                       <h5>head: @pumpDuty.head</h5>
+                       <h5>pipe width: @pumpSelections.pipewidth</h5>
+                       <h5>pipe length: @pumpSelections.pipelength</h5>
+                -->
 
             </div>
 
@@ -269,7 +282,6 @@
     protected override void OnInitialized()
     {
         calculateDuty();
-
         base.OnInitialized();
     }
 
@@ -345,20 +357,33 @@
         }
     }
 
+    struct PumpsChosenDisplayed
+    {
+        public string model;
+        public string v380;
+        public string v220;
+        public string kw;
+    }
+
+    PumpsChosenDisplayed[] pumpsChosenDisplayed = new PumpsChosenDisplayed[11];
+
+
     struct PumpsChosen
     {
         public string model;
         public string v380;
         public string v220;
-        public string v12;
+        public string kw;
     }
+
+
 
     PumpsChosen pumpsChosen = new PumpsChosen();
 
     float[,] boosterPerformance = new float[,]
          { { 0.6F, 0.8F,   1.0F,  1.2F,  1.4F, 1.6F, 1.8F,},
-          { 12.5F, 12.0F, 11.5F, 11.0F, 10.5F,10.0F, 9.5F,},
-          { 18.0F, 17.5F, 17.0F, 16.5F, 16.0F,15.0F, 14.0F,}};
+      { 12.5F, 12.0F, 11.5F, 11.0F, 10.5F,10.0F, 9.5F,},
+      { 18.0F, 17.5F, 17.0F, 16.5F, 16.0F,15.0F, 14.0F,}};
 
     /*float[,] boosterPerformance = new float[,]
 { { 0.6F, 12.5F}, { 0.8F, 12F }, { 1.0F, 11.5F }, { 1.2F, 11.0F },
@@ -366,39 +391,102 @@
 
     string[,] boosterProducts = new string[,]
         {{"VMS1-20", "VMS1-205","n/a" },
-            {"VMS1-30", "VMS1-305" ,"n/a"}};
+        {"VMS1-30", "VMS1-305" ,"n/a"}};
+
+    public class Model
+    {
+        public string id { get; set; }
+        public ModelGroup[] model_groups { get; set; }
+    }
+
+    public class ModelGroup
+    {
+        public string id { get; set; }
+        public string v380 { get; set; }
+        public string v220 { get; set; }
+        public float kw { get; set; }
+        public Flow[] flows { get; set; }
+    }
+
+    public class Flow
+    {
+        public float m3h { get; set; }
+        public float head { get; set; }
+    }
+
+    List<Model> models =
+        (
+            //from e in XDocument.Load(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"BosterPumps.xml")).Root.Elements("model")
+            from e in XDocument.Load(@"Data/BosterPumps.xml").Root.Elements("model")
+            select new Model
+            {
+                id = (string)e.Element("id"),
+                model_groups =
+                (
+                    from p in e.Elements("model_groups")
+                    select new ModelGroup
+                    {
+                        id = (string)p.Element("id"),
+                        v380 = (string)p.Element("v380"),
+                        v220 = (string)p.Element("v220"),
+                        kw = (float)p.Element("kw"),
+                        flows =
+                        (
+                            from r in p.Elements("flow")
+                            select new Flow
+                            {
+                                m3h = (float)r.Element("m3h"),
+                                head = (float)r.Element("head")
+                            }
+                        ).ToArray()
+                    }
+                ).ToArray()
+
+                /*  author = (string)p.Element("author"),
+                    title = (string)p.Element("title"),
+                    genre = (string)p.Element("genre"),
+                    price = (float)p.Element("price"),*/
+
+            }).ToList();
+
+
+
+
+
+
+
 
     float[,] boosterPerformanceVMS8 = new float[,]
-             { { 6, 7,  8,  9,  10, 11,},
-          { 10, 9.3F, 9, 18.5F, 8F, 7F,},
-          { 20, 19, 18, 17, 16, 14,},
-          { 30, 28.5F, 27, 25, 24, 21,},
-          { 41, 38, 36, 34, 32, 28,},
-          { 52, 48, 45, 42, 40, 36,},
-          { 62, 57, 54, 51, 48, 43,},
-          { 83, 77, 73, 69, 65, 58,},
-          { 104, 97, 92, 87, 81, 73,},
-          { 124, 116, 111, 104, 92, 87,},
-          { 145, 136, 130, 122, 113, 102,},
-          { 166, 156, 148, 139, 130, 118,},
-          { 187, 175, 167, 157, 146, 134,},
-          { 208, 195, 186, 175, 163, 150,},};
+     { { 6, 7,  8,  9,  10, 11,},
+      { 10, 9.3F, 9, 18.5F, 8F, 7F,},
+      { 20, 19, 18, 17, 16, 14,},
+      { 30, 28.5F, 27, 25, 24, 21,},
+      { 41, 38, 36, 34, 32, 28,},
+      { 52, 48, 45, 42, 40, 36,},
+      { 62, 57, 54, 51, 48, 43,},
+      { 83, 77, 73, 69, 65, 58,},
+      { 104, 97, 92, 87, 81, 73,},
+      { 124, 116, 111, 104, 92, 87,},
+      { 145, 136, 130, 122, 113, 102,},
+      { 166, 156, 148, 139, 130, 118,},
+      { 187, 175, 167, 157, 146, 134,},
+      { 208, 195, 186, 175, 163, 150,},};
 
     string[,] boosterProductsVMS8 = new string[,]
         {{"VMS8-20/1", "VMS8-20/1S","n/a" },
-            {"VMS8-20", "VMS8-20S" ,"n/a"},
-            {"VMS8-30", "VMS8-30S" ,"n/a"},
-            {"VMS8-40", "VMS8-40S" ,"n/a"},
-            {"VMS8-50", "VMS8-50S" ,"n/a"},
-            {"VMS8-60", "VMS8-60S" ,"n/a"},
-            {"VMS8-80", "n/a" ,"n/a"},
-            {"VMS8-100", "n/a" ,"n/a"},
-            {"VMS8-120", "n/a" ,"n/a"},
-            {"VMS8-140", "n/a" ,"n/a"},
-            {"VMS8-160", "n/a" ,"n/a"},
-            {"VMS8-180", "n/a" ,"n/a"},
-            {"VMS8-200", "n/a" ,"n/a"}
-        };
+        {"VMS8-20", "VMS8-20S" ,"n/a"},
+        {"VMS8-30", "VMS8-30S" ,"n/a"},
+        {"VMS8-40", "VMS8-40S" ,"n/a"},
+        {"VMS8-50", "VMS8-50S" ,"n/a"},
+        {"VMS8-60", "VMS8-60S" ,"n/a"},
+        {"VMS8-80", "n/a" ,"n/a"},
+        {"VMS8-100", "n/a" ,"n/a"},
+        {"VMS8-120", "n/a" ,"n/a"},
+        {"VMS8-140", "n/a" ,"n/a"},
+        {"VMS8-160", "n/a" ,"n/a"},
+        {"VMS8-180", "n/a" ,"n/a"},
+        {"VMS8-200", "n/a" ,"n/a"}
+            };
 
     PumpSelections pumpSelections = new PumpSelections(10, 2, 1, 0, "2 x Flush tank / Cistern", "Steel Pipe ( old )", 39.0F, 70.0F);
     //pumpSelections.stories = 10;
@@ -406,26 +494,83 @@
 
     public void calculateDuty()
     {
+        for (int i = 0; i < 11; i++)
+        {
+            pumpsChosenDisplayed[i].v380 = "n/a";
+        }
+
+        Console.WriteLine(models[0].model_groups[0].flows.Count());
+        Console.WriteLine(models[0].model_groups.Count());
+        int pint = 0;
+        int rint = 0;
+        int eint = 0;
+
+        Console.WriteLine(models[0].model_groups[0].id);
+
+        // float[,] boosterPerformanceAll = new float[models[0].model_groups.Count()+1, models[0].model_groups[0].flows.Count()];
+        // string[,] boosterProductsAll = new string[models[0].model_groups.Count(), 3];
+
+        calculateFlowHead();
+
+        foreach (Model e in models)
+        {
+            float[,] boosterPerformanceAll = new float[models[eint].model_groups.Count() + 1, models[0].model_groups[0].flows.Count()];
+            string[,] boosterProductsAll = new string[models[eint].model_groups.Count(), 3];
+            foreach (ModelGroup p in e.model_groups)
+            {
+                foreach (Flow r in p.flows)
+                {
+                    // Console.WriteLine(r.head);
+                    if (pint == 0)
+                    {
+                        boosterPerformanceAll[0, rint] = r.m3h;
+                    }
+                    boosterPerformanceAll[pint + 1, rint] = r.head;
+
+                    rint++;
+                }
+                // Console.WriteLine(p.kw);
+                boosterProductsAll[pint, 0] = p.v380;
+                boosterProductsAll[pint, 1] = p.v220;
+                boosterProductsAll[pint, 2] = p.kw.ToString();
+                pint++;
+                rint = 0;
+            }
+
+            pumpsChosen = choisePumps(boosterPerformanceAll, boosterProductsAll, "VMS8");
+
+            pumpsChosenDisplayed[3].model = pumpsChosen.model;
+            pumpsChosenDisplayed[3].v380 = pumpsChosen.v380;
+            pumpsChosenDisplayed[3].v220 = pumpsChosen.v220;
+            pumpsChosenDisplayed[3].kw = pumpsChosen.kw;
+            eint++;
+            // Console.WriteLine(e.model_groups[0].id);
+        }
+
+        Console.WriteLine(models[0].model_groups[0].id);
+
         PumpsChosen choisePumps(float[,] perf, string[,] prod, string model)
         {
             PumpsChosen returnStrut = new PumpsChosen();
             returnStrut.model = model;
-            returnStrut.v380 = prod[1,0];
-            returnStrut.v220 = prod[1,1];
-            returnStrut.v12 = prod[1,2];
+            returnStrut.v380 = prod[1, 0];
+            returnStrut.v220 = prod[1, 1];
+            returnStrut.kw = prod[1, 2];
 
-            returnStrut.v12 = perf.GetLength(0).ToString();
+            returnStrut.kw = perf.GetLength(0).ToString();
             returnStrut.v220 = perf.GetLength(1).ToString();
 
-            returnStrut.v12 = prod.GetLength(0).ToString(); ;
+            returnStrut.kw = prod.GetLength(0).ToString(); ;
             returnStrut.v220 = prod.GetLength(1).ToString(); ;
 
             returnStrut.v380 = "n/a";
             returnStrut.v220 = "n/a";
-            returnStrut.v12 = "n/a";
+            returnStrut.kw = "n/a";
 
             int flowIndex = 500;
             int modelIndex = 500;
+
+
 
             for (int j = 0; j < perf.GetLength(1); j++)
             {
@@ -460,7 +605,7 @@
                 {
                     returnStrut.v380 = prod[modelIndex, 0];
                     returnStrut.v220 = prod[modelIndex, 1];
-                    returnStrut.v12 = prod[modelIndex, 2];
+                    returnStrut.kw = prod[modelIndex, 2];
                 }
             }
 
@@ -468,144 +613,154 @@
 
         }
 
+        void calculateFlowHead() {
+
+            float RDB14 = 0.0F;
+            float RDC13 = 0.0F;
+            float B14;
+            float B15;
+            float B23 = 0.0F;
+            float B30;
+            float B31 = 126.96F;
+
+            float FB10 = 0.0F;
+            float FB9;
+            float RDC18 = 0.0F;
 
 
-        float RDB14 = 0.0F;
-        float RDC13 = 0.0F;
-        float B14;
-        float B15;
-        float B23 = 0.0F;
-        float B30;
-        float B31 = 126.96F;
+            switch (pumpSelections.toilet)
+            {
+                case "1 x Flush tank / Cistern":
+                    RDB14 = 6.0F;
+                    RDC13 = 1.0F;
+                    break;
+                case "1 x Flush Master":
+                    RDB14 = 90.0F;
+                    RDC13 = 2.0F;
+                    break;
+                case "2 x Flush tank / Cistern":
+                    RDB14 = 12.0F;
+                    RDC13 = 2.0F;
+                    break;
+                case "2 x Flush Master":
+                    RDB14 = 180.0F;
+                    RDC13 = 1.0F;
+                    break;
+                default:
+                    // RDB13 = 2.0F;
+                    break;
+            }
 
-        float FB10 = 0.0F;
-        float FB9;
-        float RDC18 = 0.0F;
+            B14 = (float)pumpSelections.apartments;
+            B15 = (float)(pumpSelections.sinks + pumpSelections.dishwashers + pumpSelections.washingmachines + pumpSelections.showers + pumpSelections.bathtubs + pumpSelections.washbasins + pumpSelections.bidets) + RDC13;
 
 
-        switch (pumpSelections.toilet)
-        {
-            case "1 x Flush tank / Cistern":
-                RDB14 = 6.0F;
-                RDC13 = 1.0F;
-                break;
-            case "1 x Flush Master":
-                RDB14 = 90.0F;
-                RDC13 = 2.0F;
-                break;
-            case "2 x Flush tank / Cistern":
-                RDB14 = 12.0F;
-                RDC13 = 2.0F;
-                break;
-            case "2 x Flush Master":
-                RDB14 = 180.0F;
-                RDC13 = 1.0F;
-                break;
-            default:
-                // RDB13 = 2.0F;
-                break;
+            /*   switch (pumpSelections.toilet)
+               {
+                   case "1 x Flush tank / Cistern":
+                       pumpDuty.head = (float)pumpSelections.stories * 10.0F;
+                       break;
+                   default:
+                       pumpDuty.head = (float)pumpSelections.stories * 2.0F;
+                       break;
+               } */
+            switch (pumpSelections.toilet)
+            {
+                case "1 x Flush tank / Cistern":
+
+                    B23 = 1.0F / (float)(Math.Sqrt(0.857F * B14 * B15));
+                    break;
+                case "1 x Flush Master":
+                    B23 = 1.0F / (float)(Math.Sqrt(0.857F * B14 * B15));
+                    break;
+                case "2 x Flush tank / Cistern":
+                    B23 = 1.03F / (float)(Math.Sqrt(0.545F * B14 * B15));
+                    break;
+                case "2 x Flush Master":
+                    B23 = 0.8F / (float)(Math.Sqrt(0.727F * B14 * B15));
+                    break;
+                default:
+                    // RDB13 = 2.0F;
+                    break;
+            }
+            B30 = ((float)(pumpSelections.sinks * 9 + pumpSelections.dishwashers * 10 + pumpSelections.washingmachines * 12 + pumpSelections.showers * 12 + pumpSelections.bathtubs * 15 + pumpSelections.washbasins * 6 + pumpSelections.bidets * 6) + RDB14) * (float)pumpSelections.apartments;
+            B31 = B23 * B30;
+            pumpDuty.flow = (B31 * 60.0F) / 1000.0F;
+
+            switch (pumpSelections.stories)
+            {
+                case 1:
+                    FB10 = 25.0F;
+                    break;
+                case 2:
+                    FB10 = 31.0F;
+                    break;
+                case 3:
+                    FB10 = 37.0F;
+                    break;
+                case 4:
+                    FB10 = 43.0F;
+                    break;
+                case 5:
+                    FB10 = 49.0F;
+                    break;
+                case 6:
+                    FB10 = 55.0F;
+                    break;
+                case 7:
+                    FB10 = 61.0F;
+                    break;
+                case 8:
+                    FB10 = 67.0F;
+                    break;
+                case 9:
+                    FB10 = 73.0F;
+                    break;
+                case 10:
+                    FB10 = 79.0F;
+                    break;
+                default:
+                    //  FB10 = 25.0F;
+                    break;
+            }
+
+            switch (pumpSelections.pipe)
+            {
+                case "Steel Pipe ( New )":
+
+                    RDC18 = 130.0F;
+                    break;
+                case "Steel Pipe ( old )":
+                    RDC18 = 110.0F;
+                    break;
+                case "UPVC Pipe":
+                    RDC18 = 140.0F;
+                    break;
+                case "Asbestos cement":
+                    RDC18 = 140.0F;
+                    break;
+                default:
+                    // RDC18 = 110.0F;
+                    break;
+            }
+            // RDC18 = 110.0F;
+            FB9 = pumpSelections.pipelength * (float)Math.Pow(((pumpDuty.flow / 3.6F) / (3.5888F * (float)Math.Pow(10, -6) * RDC18 * ((float)Math.Pow(pumpSelections.pipewidth, 2.63)))), 1.85);
+            pumpDuty.head = FB10 + FB9;
         }
-
-        B14 = (float)pumpSelections.apartments;
-        B15 = (float)(pumpSelections.sinks + pumpSelections.dishwashers + pumpSelections.washingmachines + pumpSelections.showers + pumpSelections.bathtubs + pumpSelections.washbasins + pumpSelections.bidets) + RDC13;
-
-
-        /*   switch (pumpSelections.toilet)
-           {
-               case "1 x Flush tank / Cistern":
-                   pumpDuty.head = (float)pumpSelections.stories * 10.0F;
-                   break;
-               default:
-                   pumpDuty.head = (float)pumpSelections.stories * 2.0F;
-                   break;
-           } */
-        switch (pumpSelections.toilet)
-        {
-            case "1 x Flush tank / Cistern":
-
-                B23 = 1.0F / (float)(Math.Sqrt(0.857F * B14 * B15));
-                break;
-            case "1 x Flush Master":
-                B23 = 1.0F / (float)(Math.Sqrt(0.857F * B14 * B15));
-                break;
-            case "2 x Flush tank / Cistern":
-                B23 = 1.03F / (float)(Math.Sqrt(0.545F * B14 * B15));
-                break;
-            case "2 x Flush Master":
-                B23 = 0.8F / (float)(Math.Sqrt(0.727F * B14 * B15));
-                break;
-            default:
-                // RDB13 = 2.0F;
-                break;
-        }
-        B30 = ((float)(pumpSelections.sinks * 9 + pumpSelections.dishwashers * 10 + pumpSelections.washingmachines * 12 + pumpSelections.showers * 12 + pumpSelections.bathtubs * 15 + pumpSelections.washbasins * 6 + pumpSelections.bidets * 6) + RDB14) * (float)pumpSelections.apartments;
-        B31 = B23 * B30;
-        pumpDuty.flow = (B31 * 60.0F) / 1000.0F;
-
-        switch (pumpSelections.stories)
-        {
-            case 1:
-                FB10 = 25.0F;
-                break;
-            case 2:
-                FB10 = 31.0F;
-                break;
-            case 3:
-                FB10 = 37.0F;
-                break;
-            case 4:
-                FB10 = 43.0F;
-                break;
-            case 5:
-                FB10 = 49.0F;
-                break;
-            case 6:
-                FB10 = 55.0F;
-                break;
-            case 7:
-                FB10 = 61.0F;
-                break;
-            case 8:
-                FB10 = 67.0F;
-                break;
-            case 9:
-                FB10 = 73.0F;
-                break;
-            case 10:
-                FB10 = 79.0F;
-                break;
-            default:
-                //  FB10 = 25.0F;
-                break;
-        }
-
-        switch (pumpSelections.pipe)
-        {
-            case "Steel Pipe ( New )":
-
-                RDC18 = 130.0F;
-                break;
-            case "Steel Pipe ( old )":
-                RDC18 = 110.0F;
-                break;
-            case "UPVC Pipe":
-                RDC18 = 140.0F;
-                break;
-            case "Asbestos cement":
-                RDC18 = 140.0F;
-                break;
-            default:
-                // RDC18 = 110.0F;
-                break;
-        }
-        // RDC18 = 110.0F;
-        FB9 = pumpSelections.pipelength * (float)Math.Pow(((pumpDuty.flow / 3.6F) / (3.5888F * (float)Math.Pow(10, -6) * RDC18 * ((float)Math.Pow(pumpSelections.pipewidth, 2.63)))), 1.85);
-        pumpDuty.head = FB10 + FB9;
 
         // pumpDuty.flow = 1.85F;
         // pumpDuty.head = 9.4F;
 
-        pumpsChosen = choisePumps(boosterPerformanceVMS8, boosterProductsVMS8, "VMS8");
+        // pumpsChosen = choisePumps(boosterPerformanceVMS8, boosterProductsVMS8, "VMS8");
+        /*  pumpsChosen = choisePumps(boosterPerformanceAll, boosterProductsAll, "VMS8");
+
+          pumpsChosenDisplayed[3].model = pumpsChosen.model;
+          pumpsChosenDisplayed[3].v380 = pumpsChosen.v380;
+          pumpsChosenDisplayed[3].v220 = pumpsChosen.v220;
+          pumpsChosenDisplayed[3].kw = pumpsChosen.kw;*/
+
+
+        Console.WriteLine("Break Point");
     }
 
     /*   void OnStartup(ChangeEventArgs e)
@@ -678,26 +833,26 @@
         try { pumpSelections.pipewidth = float.Parse(e.Value.ToString()); pipewidtherror = ""; }
         catch { pipewidtherror = "ERROR: This value used to be " + pumpSelections.pipewidth.ToString() + ".Please fix"; }
         calculateDuty();
-        }
-        void OnEditPipeLength(ChangeEventArgs e)
-        {
-            try { pumpSelections.pipelength = float.Parse(e.Value.ToString()); pipelengtherror = ""; }
-            catch { pipelengtherror = "ERROR: This value used to be " + pumpSelections.pipelength.ToString() + ". Please fix"; }
-            calculateDuty();
-        }
+    }
+    void OnEditPipeLength(ChangeEventArgs e)
+    {
+        try { pumpSelections.pipelength = float.Parse(e.Value.ToString()); pipelengtherror = ""; }
+        catch { pipelengtherror = "ERROR: This value used to be " + pumpSelections.pipelength.ToString() + ". Please fix"; }
+        calculateDuty();
+    }
 
 
 
-        /*   void OnSelect(ChangeEventArgs e)
-           {
-               selectedString = e.Value.ToString();
+    /*   void OnSelect(ChangeEventArgs e)
+       {
+           selectedString = e.Value.ToString();
 
-               Console.WriteLine("The selected country is : " + selectedString);
-           }
-           //  private void IncrementCount()
-           //  {
-           //      currentCount++;
-           //  }
-        */
+           Console.WriteLine("The selected country is : " + selectedString);
+       }
+       //  private void IncrementCount()
+       //  {
+       //      currentCount++;
+       //  }
+    */
     }
 
