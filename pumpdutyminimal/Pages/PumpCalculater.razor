@@ -238,7 +238,7 @@
                         
 
                         @{
-                            for (int i = 0; i < 11; i++)
+                            for (int i = 0; i < pumpsChosenDisplayed.Count(); i++)
                             {
                                 if (pumpsChosenDisplayed[i].v380 != "n/a")
                                 {
@@ -365,7 +365,7 @@
             public string kw;
         }
 
-        PumpsChosenDisplayed[] pumpsChosenDisplayed = new PumpsChosenDisplayed[11];
+        PumpsChosenDisplayed[] pumpsChosenDisplayed = new PumpsChosenDisplayed[30];
 
 
         struct PumpsChosen
@@ -494,7 +494,7 @@
 
         public void calculateDuty()
         {
-            for (int i = 0; i < 11; i++)
+            for (int i = 0; i < pumpsChosenDisplayed.Count(); i++)
             {
                 pumpsChosenDisplayed[i].v380 = "n/a";
             }
@@ -537,13 +537,13 @@
                     rint = 0;
                 }
 
-                pumpsChosenDisplayed[pint].v380 = "n/a";
+                pumpsChosenDisplayed[pint-1].v380 = "n/a";
                 pumpsChosen = choisePumps(boosterPerformanceAll, boosterProductsAll, e.id);
 
-                pumpsChosenDisplayed[pint].model = pumpsChosen.model;
-                pumpsChosenDisplayed[pint].v380 = pumpsChosen.v380;
-                pumpsChosenDisplayed[pint].v220 = pumpsChosen.v220;
-                pumpsChosenDisplayed[pint].kw = pumpsChosen.kw;
+                pumpsChosenDisplayed[pint-1].model = pumpsChosen.model;
+                pumpsChosenDisplayed[pint-1].v380 = pumpsChosen.v380;
+                pumpsChosenDisplayed[pint-1].v220 = pumpsChosen.v220;
+                pumpsChosenDisplayed[pint-1].kw = pumpsChosen.kw;
                 eint++;
                 pint = 0;
                 // Console.WriteLine(e.model_groups[0].id);
@@ -639,15 +639,15 @@
                         break;
                     case "1 x Flush Master":
                         RDB14 = 90.0F;
-                        RDC13 = 2.0F;
+                        RDC13 = 1.0F;
                         break;
                     case "2 x Flush tank / Cistern":
                         RDB14 = 12.0F;
                         RDC13 = 2.0F;
                         break;
-                    case "2 x Flush Master":
+                    case "2 x Flush Masters":
                         RDB14 = 180.0F;
-                        RDC13 = 1.0F;
+                        RDC13 = 2.0F;
                         break;
                     default:
                         // RDB13 = 2.0F;
@@ -679,7 +679,7 @@
                     case "2 x Flush tank / Cistern":
                         B23 = 1.03F / (float)(Math.Sqrt(0.545F * B14 * B15));
                         break;
-                    case "2 x Flush Master":
+                    case "2 x Flush Masters":
                         B23 = 0.8F / (float)(Math.Sqrt(0.727F * B14 * B15));
                         break;
                     default:
