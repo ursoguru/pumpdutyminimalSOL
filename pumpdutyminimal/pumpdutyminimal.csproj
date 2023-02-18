@@ -16,4 +16,10 @@
   <ItemGroup>
     <Folder Include="Data\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Remove="wwwroot\BosterPumps.xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="wwwroot\BosterPumps.xml" />
+  </ItemGroup>
 </Project>
